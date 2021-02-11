@@ -16,7 +16,7 @@ int main()
   
         // This is the first child
 		// getpid() gives the process of the child
-        printf("child1 id = %d", getpid()); 
+        printf("child1 id = %d and parent id = %d\n", getpid(), getppid()); 
     } 
   
     else {
@@ -24,19 +24,19 @@ int main()
         child2 = fork(); 
         if (child2 == 0) { 
 			//this is the second child
-            printf("child2 id = %d", getpid()); 
+            printf("child2 id = %d and parent id = %d\n", getpid(), getppid()); 
         } 
         else { 
             child3 = fork(); 
             if (child3 == 0) { 
                 // This is third child
-                printf("child3 id = %d", getpid()); 
+                printf("child3 id = %d and parent id = %d\n", getpid(), getppid); 
             } 
   
             // If the fork does not return 0, it is the parent
             else { 
 				//this is the parent of all children
-                printf("parent pid = %d\n", getpid()); 
+                printf("parent id = %d\n", getpid()); 
             } 
         } 
     } 

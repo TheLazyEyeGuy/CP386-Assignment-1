@@ -30,7 +30,7 @@ int main()
             child3 = fork(); 
             if (child3 == 0) { 
                 // This is third child
-                printf("child3 id = %d and parent id = %d\n", getpid(), getppid); 
+                printf("child3 id = %d and parent id = %d\n", getpid(), getppid()); 
             } 
   
             // If the fork does not return 0, it is the parent

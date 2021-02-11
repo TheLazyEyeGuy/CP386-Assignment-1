@@ -3,43 +3,24 @@
 #include <unistd.h> 
   
 // Driver code 
-int main() 
-{ 
-    int child1, child2, child3; 
-  
-    // variable pid stores the value from the fork command 
-    child1 = fork(); 
-  
-    // If fork() returns zero then it 
-    // means it is child process. 
-    if (child1 == 0) { 
-  
-        // This is the first child
-		// getpid() gives the process of the child
-        printf("child1 id = %d and parent id = %d\n", getpid(), getppid()); 
-    } 
-  
-    else {
-		// This creates the second child
-        child2 = fork(); 
-        if (child2 == 0) { 
-			//this is the second child
-            printf("child2 id = %d and parent id = %d\n", getpid(), getppid()); 
-        } 
-        else { 
-            child3 = fork(); 
-            if (child3 == 0) { 
-                // This is third child
-                printf("child3 id = %d and parent id = %d\n", getpid(), getppid()); 
-            } 
-  
-            // If the fork does not return 0, it is the parent
-            else { 
-				//this is the parent of all children
-                printf("parent id = %d\n", getpid()); 
-            } 
-        } 
-    } 
-  
-    return 0; 
+int main()
+{
+    int i;
+    //loop for 3 child processes.
+    for (i = 0; i < 3; i++) {
+        if (fork() == 0) {
+            //getpid gives the process of the child
+            printf("child%d id = %d and parent id = %d\n", i + 1, getpid(), getppid());
+            return (1);
+        }
+        wait(NULL);
+    }
+
+    //if fork doesn't return 0, it's the parent
+    if (fork() != 0) {
+        //parent of all children
+        printf("parent id = %d\n", getpid());
+    }
+    return (0);
+
 }
